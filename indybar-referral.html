@@ -1,0 +1,912 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; form-action https://www.indybar.org">
+<script>
+window.MC_JQMIGRATE_MUTE = true;
+(function(h,o,u,n,d) {
+h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+d=o.createElement(u);d.async=1;d.src=n
+n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+})(window,document,'script','//www.datadoghq-browser-agent.com/us1/v4/datadog-logs.js','DD_LOGS')
+window.DD_LOGS.onReady(function() {
+var mcTagFrames = [['googletagmanager.com','/gtm.js'],['cdn.feathr.co',''],['snap.licdn.com',''],['connect.facebook.net','']];
+function mcHostIs(host, domain) {
+return host === domain || host.slice(-(domain.length + 1)) === '.' + domain;
+}
+function mcIsTagOnlyStack(stack) {
+var firstNewline = stack.indexOf('\n');
+if (firstNewline < 0) return false;
+var frames = stack.slice(firstNewline + 1).replace(/https?:\/\/[^\s]+ line \d+ > (?:injectedScript|eval|Function)/g, '');
+var frameURL = /https?:\/\/([^\/:\s)?]+)([^\s)]*)/g;
+var match, sawTag = false;
+while ((match = frameURL.exec(frames)) !== null) {
+var host = match[1].toLowerCase(), rest = match[2];
+if (mcHostIs(host, 'datadoghq-browser-agent.com')) continue;
+var isTag = false;
+for (var j = 0; j < mcTagFrames.length; j++) {
+var tagHost = mcTagFrames[j][0], tagPath = mcTagFrames[j][1];
+if (mcHostIs(host, tagHost) && (tagPath === '' || rest.indexOf(tagPath) === 0)) { isTag = true; break; }
+}
+if (!isTag) return false;
+sawTag = true;
+}
+return sawTag;
+}
+var mcVendorGlobals = ['googletag'];
+function mcIsVendorGlobalReference(message) {
+var named = String(message).replace(/^[\s\S]*?ReferenceError:\s*/, '')
+.match(/^(?:Can't find variable: ([A-Za-z0-9_$]+)|'?([A-Za-z0-9_$]+)'? is (?:not defined|undefined))$/);
+if (!named) return false;
+var name = named[1] || named[2];
+for (var i = 0; i < mcVendorGlobals.length; i++) {
+if (mcVendorGlobals[i] === name) return true;
+}
+return false;
+}
+window.DD_LOGS.init({
+clientToken: 'pub01c3dc4781a2d0d60b9e4dd9ef0aa90b',
+site: 'datadoghq.com',
+service:'membercentral',
+env:'production',
+forwardErrorsToLogs: true,
+forwardConsoleLogs: "all",
+forwardReports: "all",
+sessionSampleRate: 100,
+beforeSend: function(log) {
+try {
+var err = log && log.error;
+if (err && err.origin !== 'network' && err.stack && mcIsTagOnlyStack(err.stack)) return false;
+if (err && mcIsVendorGlobalReference(err.message || log.message)) return false;
+} catch (e) {}
+},
+})
+window.DD_LOGS.setUserProperty('cfid', '8f6e1c95-f55f-4b80-ba15-f39368fb2633')
+window.DD_LOGS.setGlobalContextProperty('environment', 'production')
+window.DD_LOGS.setGlobalContextProperty('sitecode', 'indy')
+window.DD_LOGS.setGlobalContextProperty('CF-RAY', 'a35052fec8c8ae29-ORD')
+window.DD_LOGS.setGlobalContextProperty('jqstack', 'jq2-m1')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_device_os', '')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_browser_name', 'unknown-browser')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_subtype', '')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_is_bot', '0')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_request_date', '2026-09-02 18:31:03')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_hardware_subtype', '')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_hardware_type', '')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_is_restricted', 'false')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_is_weird', 'true')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_browser_version', '')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_is_spam', 'false')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_type', '')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_is_small_screen', '0')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_is_abusive', 'false')
+window.DD_LOGS.setGlobalContextProperty('deviceProfile_is_tablet', '0')
+});
+window.MC_JQ_BUILD_KEY = '20260902163524';
+/* A no-op stand-in for the reporting client, in case its request never lands.
+Callers read MCJSErrorReporting as a bare identifier - the MCPromises catch
+below, the onerror= on every head script and stylesheet, the head recovery
+guard, and the guards in platformUtils.js and search.js. A bare identifier
+that was never declared
+throws a ReferenceError rather than evaluating to undefined, and even
+`if (MCJSErrorReporting && ...)` throws, so a blocked or 404'd client would
+abort this block: MCPromises would never be assigned and the keepalive below
+would never start. That was safe while the client was inline and unconditional;
+it is not safe now that it is a separate request.
+The client assigns each handler over these, so the stubs only survive if it
+genuinely failed to load - in which case reporting degrades to the console
+instead of taking the page down with it. */
+window.MCJSErrorReporting = window.MCJSErrorReporting || {
+promiseRejectionHandler: function(reason) { console.error('Promise rejection (reporting client unavailable):', reason); },
+exceptionHandler: function(error) { console.error('Exception (reporting client unavailable):', error); },
+scriptLoadError: function(event) { console.error('Javascript failed to load (reporting client unavailable):', event && event.target && event.target.src); },
+cssLoadError: function(event) { console.error('CSS failed to load (reporting client unavailable):', event && event.target && event.target.href); },
+headRecovery: function(phase, files) { console.error('Head asset recovery ' + phase + ' (reporting client unavailable):', files); }
+};
+</script>
+<script src="/indylawyerfinder-demo/assets/common/javascript/mcJSErrorReporting.min.js?mcts=20260902163524"></script>
+<link type='text/css' media='screen' rel='stylesheet' href='/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/colorbox/colorbox-1.4.19.css' onerror="MCJSErrorReporting.cssLoadError(event)">
+<link rel="stylesheet" type="text/css" href="/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/datetimepicker/jquery.datetimepicker.custom.css?mcts=20260902163524" onerror="MCJSErrorReporting.cssLoadError(event)"/>	
+<link rel="stylesheet" type="text/css" href="/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/multiselect/jquery.multiselect.css?mcts=20260902163524" onerror="MCJSErrorReporting.cssLoadError(event)">
+<link rel="stylesheet" type="text/css" href="/indylawyerfinder-demo/assets/common/javascript/jqueryUI/1.14.2/jquery-ui.min.css" onerror="MCJSErrorReporting.cssLoadError(event)">
+<link rel="stylesheet" type="text/css" href="/indylawyerfinder-demo/assets/common/images/font-awesome/7.3.1/css/all.min.css" onerror="MCJSErrorReporting.cssLoadError(event)">
+<link rel="stylesheet" type="text/css" href="/indylawyerfinder-demo/assets/common/images/font-awesome/7.3.1/css/v4-shims.min.css" onerror="MCJSErrorReporting.cssLoadError(event)">
+<style type="text/css">
+div.mc-noty-item { font-family:'Open Sans', Helvetica Neue, Helvetica, Arial; }
+div.mc-noty-item i { float:left; margin-top:3px; font-size:17px; }
+div.mc-noty-item div.mc-noty { margin-left:28px; margin-right:14px; }
+.homepageWarningPopupBgColor{ background-color:#FFFFFF; }
+.homepageWarningPopupTextColor{ color:#3e3e3f; }
+.homepageWarningOverlayColor{ background-color: #808080; }
+.homepageWarningOverlayOpacity{ opacity:0.5; }
+#homepageWarningBlock.modal { position: fixed; z-index: 9999999; left: 50%; top: 10%; width:560px; overflow: auto; height:auto; border:0px!important; margin-left: -280px; padding:20px; max-height:100%; }
+#homepageWarningBlock .modal-content { padding: 0px; max-width: 750px; position: relative; }
+#homepageWarningBlock .close { float: right; font-weight: bold; line-height: 20px; font-size: 25px; opacity: .2; font-size: 35px!important; position: absolute; right: -20px; top: -20px; }
+#homepageWarningBlock .close:hover, #homepageWarningBlock .close:focus { cursor: pointer; }
+#homepageWarningBlock .modal-content img{ max-width: 750px!important; height: auto!important; width:100%; }
+.warningPopUpOverlay{ width: 100%; position: fixed; z-index: 1000; top: 0; left: 0; overflow-x: auto; overflow: hidden; text-align: center; height: 100%; }
+@media screen and (max-width:767px){ #homepageWarningBlock.modal { top: 20px; right: 20px; left: 20px; width:auto; margin:0; height:auto; max-height:95%; } }
+@media screen and (max-width:480px){ #homepageWarningBlock.modal { top: 10px; right: 10px; left: 10px; width:auto; margin:0; height:auto; max-height:95%; } }
+.ui-multiselect-checkboxes label input {top: 0px !important; margin-top: 0px !important; margin-right: 3px !important;}
+.ui-multiselect-checkboxes label {display: flex; align-items: center;}
+</style>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/core/jquery-2.2.4.min.js' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/external/cdnjs.cloudflare.com/ajax/libs/bluebird/3.7.2/bluebird.min.js' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/jQueryMigrate/mc-jquery-migrate-1.4.1.js?mcts=20260902163524' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/moment-2.30.1.min.js' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/handlebars/handlebars-v4.7.9.min.js' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/platformUtils.js?mcts=20260902163524' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/colorbox/jquery.colorbox-min-1.4.19.js' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/datetimepicker/jquery.datetimepicker.full.custom.min.js?mcts=20260902163524' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/jqueryUI/1.14.2/jquery-ui.min.js' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/multiselect/jquery.multiselect-1.13a.js' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/ajax.js?mcts=20260902163524' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript' src='/indylawyerfinder-demo/assets/common/javascript/cfform.js?mcts=20260902163524' crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<script type='text/javascript'>
+(function() {
+if (document.readyState !== 'loading') return;
+var assets = [];
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/core/jquery-2.2.4.min.js', p: function() { return !!(window.jQuery); } });
+assets.push({ u: '//cdnjs.cloudflare.com/ajax/libs/bluebird/3.7.2/bluebird.min.js', p: function() { return !!(window.Promise && window.Promise.map); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/jQueryMigrate/mc-jquery-migrate-1.4.1.js?mcts=20260902163524', p: function() { return !!(jQuery.migrateVersion); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/moment-2.30.1.min.js', p: function() { return !!(window.moment); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/handlebars/handlebars-v4.7.9.min.js', p: function() { return !!(window.Handlebars); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/platformUtils.js?mcts=20260902163524', p: function() { return !!(window.MCPlatformUtils && window.MCPlatformUtils.init); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/colorbox/jquery.colorbox-min-1.4.19.js', p: function() { return !!(jQuery.fn.colorbox); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/datetimepicker/jquery.datetimepicker.full.custom.min.js?mcts=20260902163524', p: function() { return !!(jQuery.fn.datetimepicker); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/jqueryUI/1.14.2/jquery-ui.min.js', p: function() { return !!(jQuery.ui); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/multiselect/jquery.multiselect-1.13a.js', p: function() { return !!(jQuery.fn.multiselect); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/ajax.js?mcts=20260902163524', p: function() { return !!(window.TS_AJX); } });
+assets.push({ u: '/indylawyerfinder-demo/assets/common/javascript/cfform.js?mcts=20260902163524', p: function() { return !!(window._CF_error_messages); } });
+/* A probe on a missing library throws rather than returning false -
+jQuery.fn.colorbox cannot be read when jQuery itself never loaded - so
+a throw counts as absent. It is the commonest reading here, not an
+edge case: whatever takes out jQuery takes out its plugins' probes too. */
+function present(a) {
+try { return !!a.p(); } catch (e) { return false; }
+}
+var missing = [];
+for (var i = 0; i < assets.length; i++) {
+if (!present(assets[i])) missing.push(assets[i].u);
+}
+window.MCHeadAssetCheck = { assets: assets, missing: missing };
+if (!missing.length) return;
+MCJSErrorReporting.headRecovery('detected', missing);
+for (var j = 0; j < missing.length; j++) {
+var u = missing[j];
+document.write('<scr' + 'ipt src="' + u + (u.indexOf('?') === -1 ? '?' : '&') +
+'mcretry=1" crossorigin="anonymous" onerror="MCJSErrorReporting.scriptLoadError(event)"><\/scr' + 'ipt>');
+}
+})();
+</script>
+<script type='text/javascript'>
+(function() {
+var check = window.MCHeadAssetCheck;
+if (!check || !check.missing.length) return;
+var stillMissing = [];
+for (var i = 0; i < check.assets.length; i++) {
+var a = check.assets[i];
+if (check.missing.indexOf(a.u) === -1) continue;
+try {
+if (!a.p()) stillMissing.push(a.u);
+} catch (e) {
+stillMissing.push(a.u);
+}
+}
+if (stillMissing.length) {
+MCJSErrorReporting.headRecovery('failed', stillMissing);
+return;
+}
+/* Restoring the files is not the same as restoring the page. platformUtils
+ran during the broken pass, so if jQuery or Handlebars was the truncated
+file its helper registrations and document-ready wiring already threw and
+were skipped - and re-requesting jQuery does not put them back. Without
+this call the page has no Handlebars helpers, no merge templates and no
+mcValidateLogins for the rest of its life while the block below logs
+'recovered', which is the worst of the possible outcomes: broken and
+reported healthy.
+init() is idempotent and re-runs only the steps that failed, and returns
+whether platformUtils' init is now complete - so 'recovered' means the
+page works, not merely that the bytes arrived. The existence check also
+covers callers that never load platformUtils at all, such as the
+SeminarWeb players: nothing to re-init is not a failure to report. */
+var reinitialized = true;
+try {
+if (window.MCPlatformUtils && window.MCPlatformUtils.init)
+reinitialized = !!MCPlatformUtils.init();
+} catch (e) {
+reinitialized = false;
+}
+if (reinitialized)
+MCJSErrorReporting.headRecovery('recovered', check.missing);
+else
+MCJSErrorReporting.headRecovery('failed', ['platformUtils.js:init'].concat(check.missing));
+})();
+</script>
+<script type='text/javascript'>
+var ajaxAppInstanceID="1391894";;
+var appProxyAppInstanceID="1391898";;
+var MCPromises = {
+BackendPlatformServices: MCLoader.loadJS('//services.membercentral.org/assets/common/javascript/backendPlatformServices.js?mcts=20260902163524').catch(MCJSErrorReporting.promiseRejectionHandler)
+};
+</script>
+<script async src="/indylawyerfinder-demo/assets/external/www.googletagmanager.com/gtag/js-2b5efad30e.js"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+/* make gtag available at our old custom gtag function name in case there are content object references that we don't find */
+var mc_custom_gtag = gtag;
+/* Build Cookie Flags */
+var mcGACookieFlags = 'SameSite=None'
+if ('https:' == document.location.protocol) {
+mcGACookieFlags = mcGACookieFlags + '; Secure';
+}
+/* build override pageURL passed to Analytics */
+var mcGAPageLocation = document.location.protocol + '//' + document.location.hostname + '/lawyer-referral' + '';
+gtag('js', new Date());
+/* Platform Wide GA4*/
+gtag('config', 'G-W7PB18WMHX',{ 
+'groups': 'default,platformWide',
+'page_title': 'FIND A LAWYER',
+'page_location': mcGAPageLocation,
+'cookie_prefix': '_mcga',
+'cookie_domain': document.location.hostname,
+'cookie_flags': mcGACookieFlags
+});
+/* Site-Specific Google Analytics 4 */
+gtag('config', 'UA-18547861-1',{ 
+'groups': 'default,siteSpecific',
+'page_title': 'FIND A LAWYER',
+'page_location': mcGAPageLocation,
+'cookie_prefix': '_mcga',
+'cookie_domain': document.location.hostname,
+'cookie_flags': mcGACookieFlags
+});
+</script>
+<script>
+$(function() {
+if(isIEBrowser() && (typeof localStorage.ieWarningAck == "undefined" || localStorage.ieWarningAck != "1")) {
+Promise.all([MCLoader.loadJS('/indylawyerfinder-demo/assets/common/javascript/noty/3.1.4/noty.min.js'),MCLoader.loadCSS('/indylawyerfinder-demo/assets/common/javascript/noty/3.1.4/noty.css')]).then(function(){
+popupText = '<div class="MC-IEmsg row-fluid">Internet Explorer is no longer supported. Please update to Edge or use an alternative browser such as Chrome or Firefox for best viewing results.</div>';
+new Noty({
+type:'success',
+layout:'topLeft', 
+theme:'bootstrap-v4', 
+text:popupText,
+timeout:false,
+callbacks: {
+beforeShow: function() {},
+onShow: function() {},
+afterShow: function() {},
+onClose: function() {localStorage.ieWarningAck = 1},
+afterClose: function() {},
+onHover: function() {},
+onTemplate: function() {
+this.layoutDom.className = 'noty_layout MC-IEmsgWrapper';
+this.barDom.classList.add("MC-IEmsgInnerWrapper");
+this.barDom.innerHTML = '<div class="MC-IEmsgBody noty_body">' + this.options.text + '<div>';
+// Important: .noty_body class is required for setText API method.
+}
+}
+}).show();
+}).catch(error => console.error('Failed to load Noty',error));
+}
+});
+function isIEBrowser() {
+ua = navigator.userAgent;
+/* MSIE used to detect old browsers and Trident used to newer ones*/
+var is_ie = ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+return is_ie; 
+}
+</script>
+<style>
+.MC-IEmsgWrapper{width: 100%!important;top: 0!important;left: 0!important;right: 0!important;max-width: 100%!important;}
+.MC-IEmsgInnerWrapper.noty_bar{margin:0!important;border-radius: 0!important;position:relative!important;padding:0!important;}
+.MC-IEmsgBody.noty_body{background-color: #FF0000;color: #FFFFFF;font-family: Arial;text-align: center;font-weight:bold;padding:0px!important;}
+.MC-IEmsg{height: 50px;line-height:52px!important;}
+</style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>FIND A LAWYER</title>
+<!--Css File Attachments-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/bootstrap/platformwide.bootstrap.extras.css" onerror="MCJSErrorReporting.cssLoadError(event)">
+<link rel="stylesheet" href="/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/bootstrap/css/bootstrap.min.css" onerror="MCJSErrorReporting.cssLoadError(event)">
+<link rel="stylesheet" href="/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/bootstrap/platformwide.bootstrap.overrides.css" onerror="MCJSErrorReporting.cssLoadError(event)">
+<script type="text/javascript" src="/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/bootstrap/js/bootstrap.min.js" onerror="MCJSErrorReporting.scriptLoadError(event)"></script>
+<link rel="stylesheet" href="/indylawyerfinder-demo/assets/common/javascript/jQueryAddons/bootstrap/css/bootstrap-responsive.min.css" onerror="MCJSErrorReporting.cssLoadError(event)">
+<link rel="stylesheet" href="/indylawyerfinder-demo/css/main.css">
+<link rel="stylesheet" href="/indylawyerfinder-demo/assets/common/javascript/owlCarousel/234/owl.carousel.min.css">
+<link rel="stylesheet" href="/indylawyerfinder-demo/assets/common/javascript/owlCarousel/234/owl.theme.default.min.css">
+<link rel="stylesheet" href="/indylawyerfinder-demo/css/print.css" media="print" />
+<!-- custom css files -->
+<link href="/indylawyerfinder-demo/css/mainstyle.css" rel="stylesheet" type="text/css">
+<link href="/indylawyerfinder-demo/css/mainresponsive.css" rel="stylesheet" type="text/css">
+<!-- Google Fonts -->
+<link href="/indylawyerfinder-demo/assets/external/fonts.googleapis.com/css-9f8a56ba42.css" rel="stylesheet">
+<link href="/indylawyerfinder-demo/assets/external/fonts.googleapis.com/css-2d4e678d32.css" rel="stylesheet">
+<!--javascript Files-->
+<link rel="stylesheet" href="/indylawyerfinder-demo/usercss/custom.css?mcts=20260902163524&cssmod=20220930091636" media="all" type="text/css" onerror="MCJSErrorReporting.cssLoadError(event)">
+<script src="/indylawyerfinder-demo/javascript/custom.js?mcts=20260902163524" type="text/javascript"></script>
+<script src="/indylawyerfinder-demo/assets/common/javascript/owlCarousel/234/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/indylawyerfinder-demo/javascript/indyCustomRssLoader.js"></script>
+<style>
+.ilf-conversation-placement { width: 100%; max-width: 900px; margin: 0 auto 38px; }
+.ilf-conversation-intro { max-width: 760px; margin: 0 auto 22px; text-align: center; }
+.ilf-conversation-intro h2 { margin: 0 0 9px; color: #455f84; font: 500 30px/1.2 Roboto, Arial, sans-serif; }
+.ilf-conversation-intro p { margin: 0; color: #555; font: 400 16px/1.65 Roboto, Arial, sans-serif; }
+#ilf-conversation-frame { display: block; width: 100%; height: 650px; border: 0; overflow: hidden; background: #fff; transition: height .2s ease; }
+@media (max-width: 767px) {
+  .ilf-conversation-placement { margin-bottom: 24px; }
+  .ilf-conversation-intro { padding: 0 10px; text-align: left; }
+  .ilf-conversation-intro h2 { font-size: 25px; }
+  .ilf-conversation-intro p { font-size: 15px; }
+}
+</style>
+<meta name="robots" content="noindex,nofollow"><title>Indy Lawyer Finder Interactive Prototype</title></head>
+<body>
+<img class="PrintLogo" alt="IndyBar" src="/indylawyerfinder-demo/images/logo.png" >
+<div class="wrapper">
+<header class="header outer-width">
+<div id="navbar-example" class="navbar">
+<div class="navbar-inner">
+<div class="container">
+<div class="row-fluid">
+<a class="btn-navbar menuIcon" data-toggle="collapse" data-target=".nav-collapse"> 
+<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> 
+</a> 
+<div class="navbar-brand">
+<p><a href="https://www.indybar.org"><img alt="" src="/indylawyerfinder-demo/userassets/INDY/INDY/userimages/2020%20Logo%20for%20Website2.jpg" /></a></p>
+</div>
+<ul id="searchSectionContentTop" style="display:none;">
+<li class="dropdown searchBtnFn xs979">
+<ul class=" row-fluid">
+<li class="span9 megaMenuSection">
+<div class="formframe clearfix">
+<form name="searchboxTop" action="https://www.indybar.org/?pg=search" method="post" style="margin:0">
+<input name="s_a" type="hidden" value="doSearch"> 
+<input name="s_frm" type="hidden" value="1">
+<input name="s_key_all" value="" placeholder="Search our website..." type="text">
+<a href="javascript:document.forms.searchboxTop.submit();" class="btnCustom btnWhite"><img src="/indylawyerfinder-demo/images/searchMob.png" alt=""></a>
+</form>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<ul id="searchSectionContentBottom" style="display:none;">
+<li class="dropdown searchBtnFn xsHidden979"> 
+<a href="javascript:void(0);" class="dropdown-toggle"> 
+<img class="default" src="/indylawyerfinder-demo/images/slider/search.png" alt=""> <img class="hover" src="/indylawyerfinder-demo/images/slider/searchG.png" alt=""> 
+</a>
+<ul class="dropdown-menu row-fluid">
+<li class="span3 megaMenuSection">
+<div class="heading text-center searchHeading">
+<p class="TitleText">SEARCH</p>
+</div>
+</li>
+<li class="span9 megaMenuSection">
+<div class="formframe clearfix">
+<form name="searchbox" action="https://www.indybar.org/?pg=search" method="post" style="margin:0" >
+<input name="s_a" type="hidden" value="doSearch"> 
+<input name="s_frm" type="hidden" value="1">
+<input name="s_key_all" value="" placeholder="What can we help you find?" type="text">
+<button class="btnCustom btnWhite" type="submit">See All</button>
+</form>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<ul id="memberCenterSectionContentTop" style="display:none;">
+<li class="dropdown memberFirst xs979"> 
+<a href="https://www.indybar.org/?pg=MyIndyBar" class="dropdown-toggle">
+<img src="/indylawyerfinder-demo/images/member.png" alt=""> 
+member center
+</a>
+<ul class="dropdown-menu row-fluid memberSection">
+<li class="span3 megaMenuSection xsHidden979">
+<div class="heading text-center">
+<p class="TitleText"> member center</p>
+</div>
+</li>
+<li class="span6 megaMenuSection">
+<font color="#455f84" face="Roboto, sans-serif"><span style="font-size: 24px;"><b>Indianapolis Bar Association&nbsp;</b></span></font><span style="font-size:24px;"><span style="line-height:110%"><span arial="" style="font-family:"><span style="color:#163a5f">&nbsp;| </span></span></span></span><font color="#455f84" face="Roboto, sans-serif"><span style="font-size: 24px;"><b> &nbsp;IndyBar</b></span></font></p>
+<span class="BodyText">For the best experience, log in to access members-only content and resources.&nbsp;If you are an IndyBar member, and you have never logged on to the website, click &quot;I forgot my username or password&quot; to create your log-in credentials.&nbsp;</span></p>
+<em><strong>Want to suggest a seminar speaker or topic for future consideration? Please <a href="https://memcentral.wufoo.com/forms/siwy3hl00ymzq1/">complete this form</a>.&nbsp;</strong></em></p>
+<span class="BodyText">If you have any questions or concerns, please contact us at <a href="mailto:iba@indybar.org">iba@indybar.org</a> or (317) 269-2000.&nbsp;</span></p>
+</li>
+<li class="span3 megaMenuSection">
+<p class="HeaderText">Site Login</p>
+<form action="https://www.indybar.org/?pg=login&returnurl=%2F%3Fpg%3Dmyindybar" method="post" name="frmLoginFOB" class="mc_form_login">
+<input type="hidden" name="mcSecKey" id="f30E81CBB4E58D27D88F91FF71C25C53C5CB760E0C0FA3B1ADA16098B547B6CF8D2C56F51F0E4E51FBD83C435A53090EE7A3B980B614F0DE31F7818773DA0D1BB" value="9C959EE07F0F1E0113D39ADFDE915847EDC16C85785E3A56F0EB99B18D3CE30BCA79B5929BED4C090A9138522F8ECCCA4C452EA977E2305BE4DC51DA6130D948">
+<label>Username:</label>
+<input name="username" placeholder="Username" type="text" autocomplete="off" >
+<label>Password:</label>
+<input name="password" placeholder="Password" type="password" autocomplete="off">
+<button class="btnCustom btnWhite" type="submit">Login</button>
+<a href="https://www.indybar.org/?pg=login&logact=requestReset"> I forgot my username or password</a>
+</form>
+</li>
+</ul>
+</li>
+</ul>
+<ul id="memberCenterSectionContentBottom" style="display:none;">
+<li class="dropdown xsHidden979"> 
+<a href="https://www.indybar.org/?pg=MyIndyBar" class="dropdown-toggle ">
+<img src="/indylawyerfinder-demo/images/member.png" alt=""> 
+member center
+</a>
+<ul class="dropdown-menu row-fluid memberSection">
+<li class="span3 megaMenuSection xsHidden979">
+<div class="heading text-center">
+<p class="TitleText"> member center</p>
+</div>
+</li>
+<li class="span6 megaMenuSection">
+<font color="#455f84" face="Roboto, sans-serif"><span style="font-size: 24px;"><b>Indianapolis Bar Association&nbsp;</b></span></font><span style="font-size:24px;"><span style="line-height:110%"><span arial="" style="font-family:"><span style="color:#163a5f">&nbsp;| </span></span></span></span><font color="#455f84" face="Roboto, sans-serif"><span style="font-size: 24px;"><b> &nbsp;IndyBar</b></span></font></p>
+<span class="BodyText">For the best experience, log in to access members-only content and resources.&nbsp;If you are an IndyBar member, and you have never logged on to the website, click &quot;I forgot my username or password&quot; to create your log-in credentials.&nbsp;</span></p>
+<em><strong>Want to suggest a seminar speaker or topic for future consideration? Please <a href="https://memcentral.wufoo.com/forms/siwy3hl00ymzq1/">complete this form</a>.&nbsp;</strong></em></p>
+<span class="BodyText">If you have any questions or concerns, please contact us at <a href="mailto:iba@indybar.org">iba@indybar.org</a> or (317) 269-2000.&nbsp;</span></p>
+</li>
+<li class="span3 megaMenuSection">
+<p class="HeaderText">Site Login</p>
+<form action="https://www.indybar.org/?pg=login&returnurl=%2F%3Fpg%3Dmyindybar" method="post" name="frmLogin" class="mc_form_login">
+<input type="hidden" name="mcSecKey" id="f30E81CBB4E58D27D88F91FF71C25C53C5CB760E0C0FA3B1ADA16098B547B6CF8D2C56F51F0E4E51FBD83C435A53090EE7A3B980B614F0DE31F7818773DA0D1BB" value="9C959EE07F0F1E0113D39ADFDE915847EDC16C85785E3A56F0EB99B18D3CE30BCA79B5929BED4C090A9138522F8ECCCA4C452EA977E2305BE4DC51DA6130D948">
+<label>Username:</label>
+<input name="username" placeholder="Username" type="text" autocomplete="off" >
+<label>Password:</label>
+<input name="password" placeholder="Password" type="password" autocomplete="off">
+<button class="btnCustom btnWhite" type="submit">Login</button>
+<a href="https://www.indybar.org/?pg=login&logact=requestReset"> I forgot my username or password</a>
+</form>
+</li>
+</ul>
+</li>
+</ul>
+<div class="nav-collapse collapse mainNavigationWrapper" style="display:none;">
+<ul class="nav">
+<li><a href="https://www.indybar.org/?pg=MembershipHomePage">Explore<br />
+Membership</a>
+<ul>
+<li class="span3 ">
+<div>
+<p><span class="TitleText">Explore Membership</span></p>
+<p><a class="btnCustom btnWhite" href="https://www.indybar.org/?pg=Applications-HomePage">Join Now</a></p></div>
+</li>
+<li class="span3 ">
+<ul>
+<li><a href="https://www.indybar.org/?pg=UpdateMember">My Member Profile</a></li>
+<li><a href="https://www.indybar.org/?pg=Applications-HomePage">Join IndyBar</a></li>
+<li><a href="https://www.indybar.org/?pg=Renew">Renew Your Membership</a></li>
+<li><a href="https://www.indybar.org/?pg=ParalegalMembers">Paralegal Members</a></li>
+<li><a href="https://www.indybar.org/?pg=productsubscriptions">Product Subscriptions</a></li>
+</ul>
+</li>
+<li class="span3 ">
+<ul>
+<li><a href="https://www.indybar.org/?pg=Benefits">Member Benefits</a></li>
+<li><a href="https://www.indybar.org/?pg=discounts">Member Discounts</a></li>
+<li><a href="https://www.indybar.org/?pg=FrequentlyAskedQuestions">Frequently Asked Questions</a></li>
+<li><a href="https://www.indybar.org/?pg=LegalDirectory">Legal Directory</a></li>
+<li><a href="https://www.indybar.org/?pg=listviewer&amp;lsAction=listBrowse">Listserv Hub</a></li>
+</ul>
+</li>
+<li class="span3 ">
+<ul>
+<li><a href="https://www.indybar.org/?pg=LawyerReferralService-HomePage">Referral Programs</a></li>
+<li><a href="https://www.indybar.org/?pg=LeadershipOpportunities">Volunteer Leader Opportunities</a></li>
+<li><a href="https://www.indybar.org/?pg=VolunteerOpportunities">Pro Bono Opportunities</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://www.indybar.org/?pg=ResourcesHomePage">Products and Services</a>
+<ul>
+<li class="span3 ">
+<div>
+<p><span class="TitleText">Products and Services</span></p>
+<p><a class="btnCustom btnWhite" href="https://www.indybar.org/?pg=Store">Visit the Store</a></p></div>
+</li>
+<li class="span3 ">
+<ul>
+<li><a href="https://www.indybar.org/?pg=AttorneyAccessCards">Attorney Access Cards</a></li>
+<li><a href="https://www.indybar.org/?pg=BillWatch">Bill Watch</a></li>
+<li><a href="https://www.indybar.org/?pg=FileShareLanding">Document Bank</a></li>
+<li><a href="https://www.indybar.org/?pg=FamilyLawResourceGuide">Family Law Resource Guide</a></li>
+<li><a href="https://www.indybar.org/?pg=MemberFreebies">Free Headshots</a></li>
+<li><a href="https://www.indybar.org/?pg=LawyerAssistance">Well-Being &amp; Lawyer's Assistance</a></li>
+</ul>
+</li>
+<li class="span3 ">
+<ul>
+<li><a href="https://www.indybar.org/?pg=IndianaAppellateInstitute">Indiana Appellate Institute</a></li>
+<li><a href="https://www.indybar.org/?pg=IndyAttorneysNetworkMatchProgram">Indy Attorneys Network </a></li>
+<li><a href="https://www.indybar.org/page/IndyBarHQforWorkandPlay">IndyBarHQ for Work and Play</a></li>
+<li><a href="https://www.indybar.org/?pg=LawyerReferralService-HomePage">LawyerFinder Referral Program</a></li>
+<li><a href="https://www.indybar.org/?pg=JobBank-HomePage">Job Bank</a></li>
+<li><a href="https://www.indybar.org/?pg=LegalDirectory">Legal Directory</a></li>
+</ul>
+</li>
+<li class="span3 ">
+<ul>
+<li><a href="https://www.indybar.org/?pg=mentoringnetworking">Mentoring &amp; Networking</a></li>
+<li><a href="https://www.indybar.org/?pg=OnlineCLE">On Demand CLE</a></li>
+<li><a href="https://www.indybar.org/?pg=podcasts">Podcast</a></li>
+<li><a href="https://www.indybar.org/?pg=Professionalism-HomePage">Professionalism</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://www.indybar.org/?pg=Events">Events and Education</a>
+<ul>
+<li class="span3 ">
+<div>
+<p><span class="TitleText">Events and Education</span></p>
+<p><a class="btnCustom btnWhite" href="https://www.indybar.org/?pg=Events">View Calendar</a></p></div>
+</li>
+<li class="span3 ">
+<ul>
+<li><a href="https://www.indybar.org/?pg=Events">Events Calendar</a></li>
+<li><a href="https://www.indybar.org/?pg=CLEHours">Check Your CLE Hours</a></li>
+<li><a href="https://www.indybar.org/?pg=semwebcatalog">On-Demand CLE</a></li>
+<li><a href="https://www.indybar.org/?pg=BarLeaderSeries">Bar Leader Series</a></li>
+</ul>
+</li>
+<li class="span3 ">
+<ul>
+<li><a href="https://www.indybar.org/?pg=BenchBarConference-HomePage">Bench Bar Conference</a></li>
+<li><a href="https://www.indybar.org/?pg=DestinationCLE">Destination Events/Conferences</a></li>
+<li><a href="https://www.indybar.org/?pg=NetworkingOpportunities">Networking Opportunities</a>
+<ul>
+<li><a href="https://www.indybar.org/?pg=NewlyAdmittedAttorneys">Newly Admitted Attorneys</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="interestGroup"><a href="https://www.indybar.org/?pg=InterestGroupHomePage">Interest Groups </a>
+<ul>
+<li class="span3 ">
+<div>
+<p><span class="TitleText">Interest Groups</span></p><a class="btnCustom" href="https://www.indybar.org/?pg=InterestGroupHomePage">See All</a></div>
+</li>
+<li class="span3 closeBox">
+<p><span class="HeaderText mainMenuMobBtn">Sections</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=InterestGroupHomePage">All Sections</a></li>
+<li><a href="https://www.indybar.org/?pg=AlternativeDisputeResolution-HomePage">Alternative Dispute Resolution Section</a></li>
+<li><a href="https://www.indybar.org/?pg=Appellate-HomePage">Appellate Practice Section</a></li>
+<li><a href="https://www.indybar.org/?pg=BusinessLaw-HomePage">Business Law Section</a></li>
+<li><a href="https://www.indybar.org/?pg=CommercialBankruptcyLaw-HomePage">Commercial &amp; Bankruptcy Law Section</a></li>
+<li><a href="https://www.indybar.org/?pg=CriminalJustice-HomePage">Criminal Justice Section</a></li>
+</ul>
+<ul class="mainMenuOnclick" style="display: none;">
+<li><a href="https://www.indybar.org/?pg=INFHomePage">E-Discovery, Information Governance &amp; Cybersecurity Section</a></li>
+<li><a href="https://www.indybar.org/?pg=EnvironmentalLaw-HomePage">Environmental Law Section</a></li>
+<li><a href="https://www.indybar.org/?pg=EstatePlanningAdministration-HomePage">Estate Planning &amp; Administration Section</a></li>
+<li><a href="https://www.indybar.org/?pg=FamilyLaw-HomePage">Family Law Section</a></li>
+<li><a href="https://www.indybar.org/?pg=GovermentPractice-HomePage">Government Practice Section</a></li>
+<li><a href="https://www.indybar.org/?pg=HealthCareLaw-HomePage">Health Care &amp; Life Sciences Section</a></li>
+<li><a href="https://www.indybar.org/?pg=InsuranceCoverage-Homepage">Insurance Coverage Section</a></li>
+<li><a href="https://www.indybar.org/?pg=IntellectualProperty-HomePage">Intellectual Property Section</a></li>
+<li><a href="https://www.indybar.org/?pg=LaborEmploymentLaw-HomePage">Labor &amp; Employment Law Section</a></li>
+<li><a href="https://www.indybar.org/?pg=Litigation-HomePage">Litigation Section</a></li>
+<li><a href="https://www.indybar.org/?pg=RealEstateLandUse-HomePage">Real Estate &amp; Land Use Section</a></li>
+<li><a href="https://www.indybar.org/?pg=SportsAndEntertainmentLaw-HomePage">Sports &amp; Entertainment Law Section</a></li>
+<li><a href="https://www.indybar.org/?pg=Taxation-HomePage">Tax Section</a></li>
+</ul>
+<p><span class="BodyText mainMenuOnclickBtn">See More</span></p></li>
+<li class="span3 closeBox">
+<p><span class="HeaderText mainMenuMobBtn">Committees</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=LambdaCommittee">Lambda Committee</a></li>
+<li><a href="https://www.indybar.org/?pg=Paralegal-HomePage">Paralegal Committee</a></li>
+<li><a href="https://www.indybar.org/?pg=RuleofLawCommittee">Rule of Law Committee</a></li>
+<li><a href="https://www.indybar.org/wellbeing">Well-Being Committee</a></li>
+<li><a href="https://www.indybar.org/?pg=CommitteesTaskForces-HomePage">Committees &amp; Task Forces</a></li>
+</ul>
+</li>
+<li class="span3 closeBox">
+<p><span class="HeaderText mainMenuMobBtn">Divisions</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=HispanicLawyersDivision">Hispanic Lawyers Division</a></li>
+<li><a href="https://www.indybar.org/?pg=in-house-counsel">In-House Counsel Division</a></li>
+<li><a href="https://www.indybar.org/?pg=LawStudent-HomePage">Law Student Division</a></li>
+<li><a href="https://www.indybar.org/?pg=MastersDivision">Masters Division</a></li>
+<li><a href="https://www.indybar.org/?pg=SoloSmallFirm-HomePage">Solo &amp; Small Firm Division</a></li>
+<li><a href="https://www.indybar.org/?pg=WomenAndTheLaw-HomePage">Women and the Law Division</a></li>
+<li><a href="https://www.indybar.org/?pg=YoungLawyers-HomePage">Young Lawyers Division</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://www.indybar.org/?pg=lawyer-referral">Public Services</a>
+<ul>
+<li class="span3 ">
+<div>
+<p><span class="TitleText">Public Services</span></p>
+<p><a class="btnCustom btnWhite" href="https://www.indybar.org/?pg=lawyer-referral">Find a Lawyer</a></p></div>
+</li>
+<li class="span3 closeBox">
+<ul>
+<li><a href="https://www.indybar.org/?pg=CommunityOutreach">Community Outreach</a></li>
+<li><a href="https://www.indybar.org/?pg=FrequentlyAskedQuestion">Frequently Asked Questions</a></li>
+<li><a href="https://www.indybar.org/?pg=lawyer-referral">Find a Lawyer</a></li>
+<li class="dir"><a href="https://www.indybar.org/?pg=LegalAdvice-HomePage">Get Legal Advice</a></li>
+</ul>
+</li>
+<li class="span3 closeBox">
+<ul>
+<li class="dir"><a href="https://www.indybar.org/?pg=ClientAttorneyTips">How to Choose and Work With an Attorney</a></li>
+<li class="dir"><a href="https://www.indybar.org/?pg=LegalAdvice-LowAssetWills">IndyBar Free Wills Clinic</a></li>
+<li><a href="https://www.indybar.org/?pg=LegalHelpLinks">Legal Services Agencies</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="xs979" href="https://www.indybar.org/?pg=AboutHomePage">About IndyBar</a> <a class="xsHidden979" href="https://www.indybar.org/?pg=AboutHomePage">About<br />
+IndyBar</a>
+<ul>
+<li class="span3 ">
+<div>
+<p><span class="TitleText">About IndyBar</span></p>
+<p><a class="btnCustom btnWhite" href="https://www.indybar.org/?pg=IndyBarNews">IndyBar News</a></p></div>
+</li>
+<li class="span3 closeBox">
+<ul>
+<li><a href="https://www.indybar.org/?pg=IndyBarNews">IndyBar News</a></li>
+<li><a href="https://www.indybar.org/?pg=LeadershipDirectory">Board of Directors &amp; Leadership</a></li>
+<li><a href="https://www.indybar.org/?pg=StaffDirectory">Staff Directory</a></li>
+<li><a href="https://www.indybar.org/?pg=IndyBarCareers">IndyBar Careers</a></li>
+<li><a href="https://www.indybar.org/inclusion">Inclusion and Accountability</a></li>
+</ul>
+</li>
+<li class="span3 closeBox">
+<ul>
+<li><a href="https://www.indybar.org/?pg=media">Media Inquiries</a></li>
+<li><a href="https://www.indybar.org/?pg=OurHistory">History</a></li>
+<li><a href="https://www.indybar.org/?pg=awards">Awards</a></li>
+<li><a href="https://www.indybar.org/docDownload/705174" target="_blank">Code of Bylaws</a></li>
+<li><a href="https://www.indybar.org/?pg=contact">Contact Us</a></li>
+</ul>
+</li>
+<li class="span3 closeBox">
+<ul>
+<li><a href="https://www.indybar.org/?pg=AdvertisingSponsorship">Advertising &amp; Sponsorship</a></li>
+<li><a href="https://www.indybar.org/docDownload/3051171">Form 990</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="xs979" href="https://www.indybarfoundation.org/">IndyBar Foundation</a> <a class="xsHidden979" href="https://www.indybarfoundation.org/">IndyBar<br />
+Foundation</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div><!-- /navbar- -->
+</header>
+<div class="headerSpace"></div>
+<!-- Interest Group Section Start -->
+<div class="interesGroupBox pd_60">
+<div class="container">
+<div class="row-fluid">
+<div class="interesGroupFrame">
+<p class="TitleText">FIND A LAWYER</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Interest Group Section End -->
+<!-- Event, News and Product Sections Start -->
+<div class="eventBox innerEventBox innerSimpleEventBox">
+<div class="container">
+<div class="row-fluid">
+<div class="mainContent mainContent100">
+<div class="contentdivFrame">
+<div class="firstContentBox">
+<div id="zoneMain" class="zonewrapper">
+<div id="Main10618336" class="zoneresource"><div class="row-fluid">
+<section class="ilf-conversation-placement" aria-labelledby="ilf-conversation-title">
+<div class="ilf-conversation-intro">
+<h2 id="ilf-conversation-title">Start with what you need help with.</h2>
+<p>Tell us what is going on in your own words. We will ask a few short questions and help you hire a lawyer, ask a legal question, or find free or low-cost assistance.</p>
+</div>
+<iframe id="ilf-conversation-frame" src="/indylawyerfinder-demo/finder-embed/" title="Indy Lawyer Finder guided conversation" scrolling="no"></iframe>
+</section>
+</div>
+<div class="span6">
+<h3>&nbsp;</h3>
+</div>
+<div>
+<p><img alt="" src="/indylawyerfinder-demo/userassets/INDY/INDY/userimages/25%20ilf%20website%20header.png" style="height: 447px; width: 1100px;" /></p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><!-- Event, News and Product Sections End -->
+<div class="dyouk pd_40">
+<div class="container">
+<div class="row-fluid">
+<div id="zoneM" class="zonewrapper">
+<div id="M1400288" class="zoneresource"><p class="BodyTextLarge">DID YOU KNOW?</p>
+<p class="HeaderText">Indianapolis Bar Association (IndyBar) est. 1878 | 3,776 Members as of June 16, 2026</p></div>
+</div>
+</div>
+</div>
+</div><!-- did you know End -->
+<div class="footer pd_40">
+<div class="container">
+<div class="row-fluid">
+<div class="footerFrame clearfix">
+<div class="footerLeft">
+<div class="footerLeftTopBox clearfix">
+<div id="zoneN" class="zonewrapper">
+<div id="N1400289" class="zoneresource"><p class="HeaderText">Connect With Us</p>
+<p class="BodyText">Contact us for information on membership, events, sponsorship and more.</p></div>
+</div>
+<div class="alert alert-error hidden" id="errContactMessage" style="font-size:12px;padding: 8px 28px 8px 9px;"> <button type="button" class="close" data-dismiss="alert">&times;</button><div></div></div>
+<form action="https://www.indybar.org/?pg=contactFooter" method="POST" id="contactFrm" onsubmit="return validateContactForm();">
+<input type="hidden" name="fa" value="contact">
+<input type="hidden" name="referpg" value="lawyer-referral">
+<input type="text" id="contactname" name="name" placeholder="Full Name">
+<input type="text" id="contactemail" name="address" placeholder="Email Address">
+<button type="submit" class="btnCustom btnGreen">Submit</button>
+</form>
+</div>
+<div class="footerLeftBottomBox">
+<div id="zoneO" class="zonewrapper">
+<div id="O1400290" class="zoneresource"><p class="HeaderText">Get in Touch!</p>
+<p><b>Email:</b> iba@indybar.org</p>
+<p><b>Phone:</b> (317) 269-2000</p>
+<p>140 N. Illinois St., Indianapolis, IN 46204</p>
+<p>&nbsp;</p>
+<p><strong>Lawyer Referral:</strong>&nbsp;<a href="https://www.indybar.org/?pg=lawyer-referral">indylawyerfinder.com</a></p>
+<p>&nbsp;</p>
+<p><a class="btnCustom btnBlue" href="https://www.indybar.org/?pg=contact">Contact Us</a><br />
+&nbsp;</p>
+<p><a class="btnCustom btnBlue" href="https://www.indybar.org/?pg=indybarhq">Visit IndyBarHQ</a><br />
+&nbsp;</p>
+<p><a class="btnCustom btnBlue" href="https://www.indybar.org/?pg=lawyer-referral">Find a Lawyer</a></p>
+<p>&nbsp;</p></div>
+</div>
+</div>
+</div>
+<div class="footerRight xsHidden767">
+<div id="zoneQ" class="zonewrapper">
+<div id="Q1400292" class="zoneresource"><div>
+<p><span class="BodyTextLarge">About IndyBar</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=IndyBarNews">IndyBar News</a></li>
+<li><a href="https://www.indybar.org/?pg=LeadershipDirectory">Board of Directors &amp; Leadership Directory</a></li>
+<li><a href="https://www.indybar.org/?pg=StaffDirectory">Staff Directory</a></li>
+<li><a href="https://www.indybar.org/?pg=IndyBarCareers">IndyBar Careers</a></li>
+<li><a href="https://www.indybar.org/inclusion">Inclusion and Accountability</a></li>
+<li><a href="https://www.indybar.org/?pg=media">Media Inquiries</a></li>
+<li><a href="https://www.indybar.org/?pg=OurHistory">History</a></li>
+<li><a href="https://www.indybar.org/?pg=awards">Awards</a></li>
+<li><a href="https://www.indybar.org/docDownload/705174">Code of Bylaws</a></li>
+<li><a href="https://www.indybar.org/?pg=AdvertisingSponsorship" style="color: rgb(86, 55, 133);">Advertising &amp; Sponsorship</a></li>
+<li><a href="https://www.indybar.org/docDownload/3051171">Form 990</a></li>
+</ul>
+<div>
+<p><span class="BodyTextLarge">IndyBar Foundation</span></p>
+<ul>
+<li><a href="https://www.indybarfoundation.org/">Visit the IndyBar Foundation Website</a></li>
+</ul>
+</div>
+</div>
+<div>
+<p><span class="BodyTextLarge">Explore Membership</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=UpdateMember">My Member Profile</a></li>
+<li><a href="https://www.indybar.org/?pg=Applications-HomePage">Join IndyBar</a></li>
+<li><a href="https://www.indybar.org/?pg=Renew">Renew Your Membership</a></li>
+<li><a href="https://www.indybar.org/?pg=ParalegalMembers">Paralegal Members</a></li>
+<li><a href="https://www.indybar.org/?pg=Benefits">Member Benefits</a></li>
+<li><a href="https://www.indybar.org/?pg=productsubscriptions">Product Subscriptions</a></li>
+<li><a href="javascript:void(0);">Member&nbsp;</a><a href="https://www.indybar.org/?pg=discounts">Discounts</a></li>
+<li><a href="https://www.indybar.org/?pg=FrequentlyAskedQuestions">FAQ</a></li>
+<li><a href="https://www.indybar.org/?pg=LegalDirectory">Legal Directory</a></li>
+<li><a href="https://www.indybar.org/?pg=listviewer&amp;lsAction=listBrowse">Listserv Hub</a></li>
+<li><a href="https://www.indybar.org/?pg=LawyerReferralService-HomePage">Referral Programs</a></li>
+<li><a href="https://www.indybar.org/?pg=LeadershipOpportunities">Volunteer Leadership Opportunities</a></li>
+<li><a href="https://www.indybar.org/?pg=VolunteerOpportunities">Pro Bono Opportunities</a></li>
+</ul>
+<p><span class="BodyTextLarge">Interest Groups</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=InterestGroupHomePage">See All Sections, Divisions &amp; Committees</a></li>
+</ul>
+</div>
+<div>
+<p><span class="BodyTextLarge">Products and Services</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=AttorneyAccessCards">Attorney Access Cards</a></li>
+<li><a href="https://www.indybar.org/?pg=BillWatch">Bill Watch</a></li>
+<li><a href="https://www.indybar.org/?pg=DocumentLibrary">Document Bank</a></li>
+<li><a href="https://www.indybar.org/?pg=FamilyLawResourceGuide">Family Law Resource Guide</a></li>
+<li><a href="https://www.indybar.org/?pg=MemberFreebies">Free Headshots</a></li>
+<li><a href="https://www.indybar.org/?pg=IndyBarHQforWorkandPlay">IndyBarHQ for Work and Play</a></li>
+<li><a href="https://www.indybar.org/?pg=IndianaAppellateInstitute">Indiana Appellate Institute</a></li>
+<li><a href="https://www.indybar.org/?pg=IndyAttorneysNetworkMatchProgram">Indy Attorneys Network</a></li>
+<li><a href="https://www.indybar.org/?pg=LawyerReferralService-HomePage">LawyerFinder Referral Program</a></li>
+<li><a href="https://www.indybar.org/?pg=JobBank-HomePage">Job Bank</a></li>
+<li><a href="https://www.indybar.org/?pg=LegalDirectory">Legal Directory</a></li>
+<li><a href="https://www.indybar.org/?pg=mentoringnetworking">Mentoring &amp; Networking</a></li>
+<li><a href="https://www.indybar.org/?pg=podcasts">Podcast</a></li>
+<li><a href="https://www.indybar.org/?pg=Professionalism-HomePage">Professionalism</a></li>
+<li><a href="https://www.indybar.org/?pg=well-being">Well-Being &amp; Lawyers Assistance</a></li>
+</ul>
+</div>
+<div>
+<p><span class="BodyTextLarge">Events and Education</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=Events">Events Calendar</a></li>
+<li><a href="https://www.indybar.org/?pg=CLEHours">Check Your CLE Hours</a></li>
+<li><a href="https://www.indybar.org/?pg=semwebcatalog">On-Demand CLE</a></li>
+<li><a href="https://www.indybar.org/?pg=11thHour">Year-End CLE Hub</a></li>
+<li><a href="https://www.indybar.org/?pg=freecle">Free CLE</a></li>
+<li><a href="https://www.indybar.org/?pg=BarLeaderSeries">Bar Leader Series</a></li>
+<li><a href="https://www.indybar.org/?pg=BenchBarConference-HomePage">Bench Bar Conference</a></li>
+<li><a href="https://www.indybar.org/?pg=DestinationCLE">Destination Events/Conferences</a></li>
+<li><a href="https://www.indybar.org/?pg=NetworkingOpportunities">Networking Opportunities</a></li>
+<li><a href="https://www.indybar.org/?pg=NewlyAdmittedAttorneys">Newly Admitted Attorneys</a></li>
+</ul>
+</div>
+<div>
+<p><span class="BodyTextLarge">Public Services</span></p>
+<ul>
+<li><a href="https://www.indybar.org/?pg=CommunityOutreach">Community Outreach</a></li>
+<li><a href="https://www.indybar.org/?pg=FrequentlyAskedQuestion">Frequently Asked Questions</a></li>
+<li><a href="https://www.indybar.org/?pg=lawyer-referral">Find a Lawyer</a></li>
+<li><a href="https://www.indybar.org/?pg=LegalAdvice-HomePage">Get Legal Advice</a></li>
+<li><a href="https://www.indybar.org/?pg=ClientAttorneyTips">How to Choose and Work With an Attorney</a></li>
+<li><a href="https://www.indybar.org/?pg=LegalAdvice-LowAssetWills">Free Wills Clinic</a></li>
+<li><a href="https://www.indybar.org/?pg=LegalHelpLinks">Legal Services Agencies</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footerBottomFrame clearfix">
+<div id="zoneP" class="zonewrapper">
+<div id="P1400291" class="zoneresource"><div>
+<p class="HeaderText">Find Us On</p>
+<ul>
+<li><a href="http://www.facebook.com/indybar" target="_blank"><i aria-hidden="true" class="fab fa-facebook">&nbsp;</i></a></li>
+<li><a href="http://www.instagram.com/indybar" target="_blank"><i aria-hidden="true" class="fab fa-instagram">&nbsp;</i></a></li>
+<li><a href="https://vimeo.com/indybar" target="_blank"><i aria-hidden="true" class="fab fa-vimeo">&nbsp;</i></a></li>
+<li><a href="https://www.linkedin.com/groups/3501181" target="_blank"><i aria-hidden="true" class="fab fa-linkedin">&nbsp;</i></a></li>
+</ul>
+</div>
+<div>
+<p>&copy;2026 Indianapolis Bar Association. All rights reserved. Use of this website constitutes acceptance of our <a href="https://www.indybar.org/?pg=PrivacyPolicy"> Terms of Use </a>/<a href="https://www.indybar.org/?pg=PrivacyPolicy">Privacy Policy</a>. Read our <a href="https://www.indybar.org/?pg=Listserv"> IndyBar Listserv Guidelines</a>.<br />
+&nbsp;</p>
+<p><em>IndyBar Review, Legal Line, Indy Lawyer Finder, and Ask a Lawyer are registered trademarks of the Indianapolis Bar Association.</em></p></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div><!-- wrapper end -->
+<script>
+(function () {
+  var frame = document.getElementById('ilf-conversation-frame');
+  window.addEventListener('message', function (event) {
+    var frameOrigin = new URL(frame.src, window.location.href).origin;
+    if (event.origin !== frameOrigin || !event.data || event.data.type !== 'indybar-finder-height') return;
+    var nextHeight = Math.max(540, Math.min(2400, Number(event.data.height) || 650));
+    frame.style.height = nextHeight + 'px';
+  });
+})();
+</script>
+</body>
+</html>

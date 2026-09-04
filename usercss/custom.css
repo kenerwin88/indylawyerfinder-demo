@@ -1,0 +1,240 @@
+/* Section Leaders - Interest Group Pages */
+/* Positions */
+.eventlightGreen .eventBoxFrame > div:last-child .HeaderText {    color: #455f84;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+    font-size: 14px; line-height: 26px;}
+
+/* Company */
+.eventlightGreen .eventBoxFrame > div:last-child .BodyTextLarge {line-height: 24px; color: #434343; margin-bottom: 0px; }
+
+/* Name */
+.eventlightGreen .eventBoxFrame > div:last-child strong {font-weight: bold;}
+
+/* Emails */
+.eventlightGreen .eventBoxFrame > div:last-child a {color: #028b87; line-height: 20px;
+    padding-top: 3px;}
+
+/* All */
+.eventlightGreen .eventBoxFrame > div:last-child {text-align: left; padding-left: 30px; padding-right: 30px;}
+.eventlightGreen .eventBoxFrame > div:last-child p {margin-bottom: 30px;}
+@media (max-width: 1600px) {.eventlightGreen .eventBoxFrame > div:last-child {padding-left: 20px; padding-right: 20px;}}
+@media (max-width: 1199px) {.eventlightGreen .eventBoxFrame > div:last-child {padding-left: 10px; padding-right: 10px;;}}
+
+/* Interest Group Pages - Box Heights */
+/*.eventTextBox, .eventBoxFrame > div:last-child > div> div:first-child { min-height: 325px;}
+@media (max-width: 1799) {.eventTextBox, .eventBoxFrame > div:last-child > div> div:first-child { min-height: 460px;}} */
+
+/* Member Center Dropdown */
+.header .navbar .nav li.dropdown .megaMenuSection p .HeaderText::before {
+    width: 290px;
+    top: 100%;
+    height: 2px;
+    background: #fffc;
+    content: "";
+    position: absolute;
+    border-radius: 4px;}
+@media (max-width: 1299px) {.header .navbar .nav li.dropdown .megaMenuSection p .HeaderText::before {
+    width: 240px;}}
+@media (max-width: 1199px) {.header .navbar .nav li.dropdown .megaMenuSection p .HeaderText::before {
+    width: 140px;}}
+.header .navbar .nav li.dropdown .megaMenuSection p .HeaderText {
+    font-weight: 100;
+    color: #fff;
+    position: relative;
+    padding-bottom: 5px;
+    font-size: 30px;
+    line-height: normal;
+    margin-bottom: 20px;}
+.header .navbar .nav li.dropdown .memberSection li, .header .navbar .nav li.dropdown .memberSection li p {display: block;}
+.memberSection .BodyText {text-transform: none;}
+/* Homepage Products & Services */
+.eventTextBox p, .eventBoxFrame > div:last-child > div p span {
+    color: #fff;
+}
+
+/* Footer */
+@media (max-width: 425px){.footerBottomFrame > div > div> div:first-child ul {
+    margin-top: 10px;
+}}
+
+/* Mobile Menu */
+@media screen and (max-width: 979px){
+.header .navbar .nav li.dropdown.interestGroup .megaMenuSection p .HeaderText {
+    font-size: 18px !important;
+    font-weight: 500;
+    margin-bottom: 0px;
+}}
+@media screen and (max-width: 1199px){
+.header .navbar .nav li.dropdown .megaMenuSection p .HeaderText {
+    font-size: 24px;
+}}
+.header .navbar .nav li.dropdown .megaMenuSection p .HeaderText {
+    font-weight: 100;
+    color: #fff;
+    position: relative;
+    padding-bottom: 5px;
+    font-size: 30px;
+    line-height: normal;
+    margin-bottom: 20px;
+}
+
+/*Resources area of interior pages */
+.Resources p span.HeaderText:after {
+    width: 175px;
+    height: 2px;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: #455f84;
+    content: "";
+}
+.Resources p span.HeaderText {
+    position: relative;
+    padding-bottom: 5px;
+}
+
+/* Format fonts on blog pages */
+#frmBlog {
+    font-weight: 300;
+    line-height: 26px;
+    font-size: 18px;
+    color: #434343;}
+
+#frmBlog h1 {font-size: 26px; line-height: 1.1em; }
+
+/* Conflicting BodyTextLarge sizes */
+.BodyTextLarge {font-size: 20px !important;}
+.eventlightGreen .BodyTextLarge, .eventdivFrame .BodyTextLarge, .eventgreen .BodyTextLarge, .eventblue .BodyTextLarge, .eventdarkgreen .BodyTextLarge, .sidebar .BodyTextLarge {font-size: 16px !important;}
+
+/* HeaderText with link around instead of within */
+a .HeaderText, a .BodyText, a .BodyTextLarge, a .BlueText, a .TitleText {color: #008e89;}
+
+/* Sidebar email addresses overlapping other columns */
+.sidebar {word-wrap: break-word;}
+
+/* Announcement button text on homepage */
+@media (max-width: 480px) {.progresReportBox .btnCustom {font-size: 8px; line-height: 1em;}}
+
+/* tsApps */
+.tsAppBodyText { font-family: 'Roboto', sans-serif;font-weight: 300; line-height: 26px; font-size: 12px; color: #434343; }
+.tsAppBodyText p { font-family: 'Roboto', sans-serif;font-weight: 300; line-height: 26px; font-size: 16px; color: #434343; }
+.tsAppHeading {font-family: 'Roboto', sans-serif; font-size: 24px; color: #455f84; font-weight: bold; }
+
+/* MyIndyBar Page */
+.mcMergeTemplate[data-mcjsonvariable="upcomingevents"], .mcMergeTemplate[data-mcjsonvariable="Registeredevents"] {line-height: 18px !important; font-size: 14px;}
+
+.mcMergeTemplate[data-mcjsonvariable="upcomingevents"] a, .mcMergeTemplate[data-mcjsonvariable="Registeredevents"] a,  #newStoreItem li a, #pastdueinvoice li a, #recentPayment li a, #newfilesharedocs li a, #myfiledownloads li a, #watshappening li a,  #other div a, #Other2 div a,  #mypurchase li a  {text-transform: none !important; font-weight: normal !important; line-height: 18px !important;}
+
+#recentBlogPost div a, #recentBarNews div a {font-size: 16px !important;}
+
+.mcMergeTemplate[data-mcjsonvariable="upcomingevents"], .mcMergeTemplate[data-mcjsonvariable="Registeredevents"],  #newStoreItem li, #pastdueinvoice li, #recentPayment li, #newfilesharedocs li, #myfiledownloads li,  #mypurchase li, #recentBlogPost p, #recentBarNews p  { font-size: 14px !important;}
+
+
+#Main2143493 .BodyText, #Main2143493 .BlueText {font-size: 14px !important;}
+
+.memName {font-family: 'Roboto', sans-serif;
+    font-size: 20px !important;
+    color: #455f84 !important;
+    font-weight: bold;}
+
+.mc-mergeTagList {margin: 10px;
+    padding-left: 10px;
+    list-style-image: url('/indylawyerfinder-demo/userassets/INDY/INDY/userimages/IndyBullet6.jpg');}
+
+.myInfo .showBullets {list-style-image: url('/indylawyerfinder-demo/userassets/INDY/INDY/userimages/IndyBullet6.jpg'); margin: 15px 0 0 0;}
+
+a[href="#recentBarNews"] {display: none !important;}
+
+/* Homepage Announcement Banner button text */
+@media (max-width: 480px;) {.progresReportBox .btn a {font-size: 8px;}}
+
+/* Update Interest Group buttons */
+.eventlightGreen .btn, .eventBoxBottom .btn  {background: transparent;
+    border: 2px solid;
+    font-size: 13px;
+    font-weight: 500;
+    height: 50px;
+    min-width: 160px;
+    text-transform: uppercase;
+    border-radius: 0px;
+    font-family: 'Roboto Mono', monospace;
+    line-height: 46px;
+    padding: 0;
+    margin: 0;
+    letter-spacing: 2px;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0 25px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;}
+
+.eventlightGreen .btn {text-decoration: none!important;
+    color: #455f84!important; cursor: pointer;    line-height: 20px;
+    padding-top: 3px;}
+
+.eventlightGreen .btn:hover {color: #fff !important;}
+
+.eventBoxBottom .btn:hover {    color: #2d3e55 !important;}
+
+
+
+/* Logout link */
+.header .navbar .nav > li:last-child > a, .header .navbar .nav > li:last-child > a + a.logoutLink {
+    background-color: #007977;
+}
+
+@media only screen and (max-width: 979px){
+.logoutLink {
+    left: 75px;
+    top: 45px!important;
+    line-height: 12px!important;
+}}
+
+/* Footer Headings */
+.footerRight .BodyTextLarge {line-height: 1em;}
+
+@media (max-width: 1199px) {.footerRight .BodyTextLarge {font-size: 16px;}}
+
+/* BodyText links */
+a .BodyText, .BodyText a {
+    font-family: 'Roboto', sans-serif;
+    color: #008e89;
+}
+
+/* spacing between menu items */ 
+
+@media screen and (max-width: 1299px){
+.header .navbar .nav li > a { height: auto;}}
+
+/* BodyText Bolding */
+strong .BodyText {font-weight: bold;}
+
+/*sponsors on homepage */
+.featureSlider .item img {  border: 1px solid #000; }
+
+/* hide photo on mypages */
+#Main5675663 .myPhoto {display: none;}
+
+/* Hide Footer Contact Form */
+.footerLeftTopBox {
+    display: none;
+}
+
+/* Raise Footer Contact Info */
+.footerLeft {
+margin-top: -20px;
+}
+
+#Main10618336 h3 {
+  color: #008e89;
+}
+
+#Main10618336 .btn.btn-success.btn-large {
+  background-color: #008e89;
+  background-image: none;
+}

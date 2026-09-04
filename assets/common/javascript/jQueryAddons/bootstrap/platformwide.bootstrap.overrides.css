@@ -1,0 +1,9 @@
+@media print {
+  a[href]:after {
+    content: "";
+  }
+}
+/*--- Icon fix ---*/
+[class^="icon-"], [class*=" icon-"]{
+  background:none!important;
+}

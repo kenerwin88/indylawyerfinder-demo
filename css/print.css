@@ -1,0 +1,20 @@
+.interesGroupBox,.headerSpace,.dyouk,.eventdivFrame,.eventdiv,.sidebar,.footer,.header,header,footer,video,audio,object,embed,iframe,#toolBarArea,.i-am-new{ display:none;height:auto!important; }
+.hiddenPrint{display:none;}
+body {
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	height:auto;
+	background:#fff;
+}
+.mainContent{
+	width:100%!important;
+}
+.headerSpace{
+	height:0px;
+}
+#homepageTemplate img{
+	display: none;
+}
+.PrintLogo{
+	position: relative!important;
+}

@@ -1,0 +1,25 @@
+/* tsApps styles and overrides */
+@import url("/indylawyerfinder-demo/assets/common/css/tsApps.css");
+
+/* Include in Editor: Start */
+/* Include in Editor: Start */
+.BlueText { font-family: 'Roboto', sans-serif; font-weight: 300; line-height: 26px; font-size: 18px; color: #434343; color: #455f84; }
+.BodyTextLarge {font-family: 'Roboto', sans-serif; font-weight: 300; line-height: 26px; font-size: 20px; color: #434343; }
+.BodyText { font-family: 'Roboto', sans-serif;font-weight: 300; line-height: 26px; font-size: 18px; color: #434343; }
+.TitleText { font-family: 'Roboto', sans-serif;font-size: 32px; color: #455f84; font-weight: 300; line-height: normal; }
+.HeaderText {font-family: 'Roboto', sans-serif; font-size: 24px; color: #455f84; font-weight: bold; }
+.HeaderTextSmall { font-family: 'Roboto', sans-serif; font-size: 20px; color: #455f84; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; }
+
+
+.MicroBody{font-size:14px; font-family:"Source Sans Pro",sans-serif; color: #1B1B1B;}
+.MicroHeader1Blue{font-family:"Fjalla One",sans-serif; font-size: 43px; color: #0F76BF}
+.MicroHeader2Black{font-size:20px; font-family:"Source Sans Pro", sans-serif; color: #1B1B1B;}
+.MicroBodyWhite{font-size:22px; font-family:"Source Sans Pro",sans-serif; color:#FFFFFF;}
+.MicroHeader2White{font-size:31px; font-family:"Source Sans Pro",sans-serif; color:#FFFFFF;}
+/* Include in Editor: Stop */
+
+
+
+/*STYLES NOT IN THE EDITOR: ***********************************************************************************************/
+a .BodyText, .BodyText a, a{font-family:arial; color:#0064b1;}
+a:hover .BodyText, .BodyText a:hover, a:hover{ color:#563785;}

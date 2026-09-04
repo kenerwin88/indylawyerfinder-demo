@@ -1,0 +1,14 @@
+/* backport of the panel from Bootstrap 3  */
+.mcpanel { border: 1px solid #dedede; margin-bottom: 20px; padding:0px!important;border-radius:0px;box-shadow:none; }
+.mcpanel-title { background: #dedede; margin: 0; padding: 8px 10px; }
+.mcpanel-body { padding: 10px; }
+.mcpanel-button { margin: 0 auto; text-align: center; margin-bottom: 10px; }
+.mcpanel-button:last-child { margin-bottom: 2px; }
+.mcpanel-body p span { display: block; }
+.mcpanel-body p:last-child { margin-bottom: 0; }
+.mcpanel-body ul { margin-bottom: 10px; margin-left: 10px; }
+.mcpanel-body ul.inline.social { margin: 0 auto; text-align: center; }
+.mcpanel-body li { padding: 0; margin-bottom: 6px; font-weight: 400; }
+
+table.mctable-noborder td, table.mctable-noborder th {border-top:none;}
+

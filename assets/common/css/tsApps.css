@@ -1,0 +1,284 @@
+/* styles used in apps */
+.tsAppHeading { font-family:Verdana, Arial, Helvetica, sans-serif; color:#0E568D; font-weight:bold; font-size:11.5pt; }
+.tsAppLegendTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:10pt; color:#0E568D; font-weight:bold; background-color:#fff; }
+.tsAppBodyText { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666;}
+.tsAppTabHeader { padding: 3px 15px; }
+.tsAppBodyTextImportant { font-weight:bold; color:#F00; }
+.tsAppBodyText b { font-weight:bold; }
+.tsAppLegendTitle .red, .tsAppBodyText .red { color:#F00; }
+.tsAppLegendTitle .tax, .tsAppBodyText .tax { font-size:.9em; }
+input.tsAppBodyText { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.tsAppBodyTextCheckBoxSize {width:12px; height:12px;}
+.tsAppB { border:1px solid #333; }
+.tsAppB50 { border:1px solid #666; }
+.tsAppB20 { border:1px solid #ccc; }
+.tsAppBB { border-bottom:1px solid #333; }
+.tsAppBB50 { border-bottom:1px solid #666; }
+.tsAppBB20 { border-bottom:1px solid #ccc; }
+.tsAppBR { border-right:1px solid #333; }
+.tsAppBR50 { border-right:1px solid #666; }
+.tsAppBR20 { border-right:1px solid #ccc; }
+.tsAppBL { border-left:1px solid #333; }
+.tsAppBL50 { border-left:1px solid #666; }
+.tsAppBL20 { border-left:1px solid #ccc; }
+.tsAppBT { border-top:1px solid #333; }
+.tsAppBT50 { border-top:1px solid #666; }
+.tsAppBT20 { border-top:1px solid #ccc; }
+table.tsApp { background-color:#fff; }
+table.tsAppBodyText td, table.tsAppBodyText th { padding:3px; }
+.tsAppBG { background-color:#DEDEDE; }
+.tsAppBodyButton {font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#333333; font-weight:bold;}
+.tsAppBodyButton[disabled] {font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#aaaaaa; font-weight:normal;}
+.tsAppDirPhoto { max-width:80px;}
+.tsAppAlert { background: #fff6bf; text-align: left; padding: 5px 20px 5px 45px; border-top: 2px solid #f00; border-bottom: 2px solid #f00; font-weight: bold; position: relative; }
+.tsAppAlert::before { content: "\f06a"; font: var(--fa-font-solid);position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #f00; background: #fff; border-radius: 50%; padding: 5px; }
+.tsAppSuccess { background: #91C94C; text-align: left; padding: 5px 20px 5px 45px; border-top: 2px solid #537C2C; border-bottom: 2px solid #537C2C; font-weight: bold; position: relative; }
+.tsAppSuccess::before { content: "\f058";font: var(--fa-font-solid);position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #fff; }
+.tsAppWarning { background:#fcf8e3; text-align:left; padding:5px 20px 5px 20px; color: #c09853; border:1px solid #fbeed5;}
+.tsAppInfo { background:#d9edf7; text-align:left; padding:5px 20px 5px 20px; color: #000000; border:1px solid #bce8f1;}
+.tsAppBodyTextRequired {font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#990000; font-weight:bold;}
+div.tsAppSectionHeading { font-family:Verdana, Arial, Helvetica, sans-serif; color:#222; background-color: #F5F5F5; padding:10px; font-size:15px; font-weight:bold; }
+span.tsAppSectionHeadingNote { float:right; font-size:11pt; font-weight:normal; }
+div.tsAppSectionContentContainer { padding:12px; margin-bottom:24px; }
+.rowcolor0{background : #E0E0E0;}
+.rowcolor1{background : #FFF;}
+@media print {
+	.tsAppNoPrint { display: none !important; }
+}
+
+
+
+/* calendar app styles */
+#appcalendar a { cursor: pointer; text-decoration: none; }
+#appcalendar caption { margin: 0 auto; text-align: left; font: 20px/30px Georgia, serif; }
+#appcalendar p { margin: 0; }
+#appcalendar strong { text-transform: uppercase; }
+#appcalendar table { background: #fff; border-bottom: 3px solid #9c6; border-right: 1px solid #ccb; }
+#appcalendar th, #appcalendar td { border-left: 1px solid #ccb; border-top: 1px solid #ccb; border-bottom: 1px solid #ccb; border-right: 1px solid #ccb; font-family: Verdana, sans-serif; padding: 0 2px; vertical-align: top; width:14%; height: inherit; }
+#appcalendar td a { color: #33f; padding: 0 0 0 10px; }
+#appcalendar td a:hover { text-decoration: underline; }
+#appcalendar col.day1, #appcalendar col.day7 { background: #efe; }
+#appcalendar td.emptynumber { background: #fff; }
+#appcalendar td.emptyday { background: #fff; border-top: 1px solid #ccb; border-bottom: 1px solid #ccb; }
+#appcalendar td.today { background: #ffddaa; }
+#appcalendar td.todaynumber { }
+#appcalendar tr.day { color: #665; font-size:10px; height: 90px; }
+#appcalendar tr.number { background:#DEDEDE; color:#998; font-weight:bold; font-size:11px; height:15px; text-align:right; vertical-align:middle; }
+#appcalendar th { background: #998; color: #fff; font-size: 12px; font-variant: small-caps; font-weight: normal; height: 15px; text-transform: capitalize; text-align: center; vertical-align: middle; }
+#appcalendar .month_event { font-family: Verdana,Sans-serif; font-style: normal; font-variant: normal; font-weight: normal; font-size: 85%; line-height: 1.2em; font-size-adjust: none; font-stretch: normal; -x-system-font: none; margin-bottom: 1px; padding-top: 1px; padding-right: 0pt; padding-bottom: 2px; padding-left: 0pt; }
+#appcalendar .month_event { position: absolute; overflow-x: hidden; overflow-y: hidden; white-space: nowrap; }
+
+/* Fileshare 2 app styles */
+.fsFileDescription { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-style:italic; color:#666; }
+.fsTagsTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsTags { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsHotDocument { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11pt; font-weight:bold; color:#664400; }
+.fsCustomTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsCustom { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsSectionPathTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsSectionPath { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsPublicationDateTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsPublicationDate { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsAuthorTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsAuthor { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsContributedByTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsContributedBy { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsFirmTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsFirm { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsAddressTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsAddress { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsEmailTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsDescription { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsDownloadsTitle { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; font-weight:bold; color:#666; }
+.fsDownloads { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+.fsVersioning { font-family:Verdana, Arial, Helvetica, sans-serif; font-size:9pt; color:#666; }
+
+/* general widget css */
+.widget_ItemLeft img { border:1px solid #b8c5d6; }
+.widget_header { background-color:#0E568D; padding:4px; font-weight:bold; text-align:left; color:#fff; }
+.widget_header a:link, .widget_header a:visited, .widget_header a:active { color:#fff; }
+.widget_border { border:1px solid #b8c5d6; }
+.widget_scroll { height:300px; overflow:auto; }
+
+/* FS2 & ADDITIONAL APP STYLES - DO NOT REMOVE */
+.s_row { padding:6px; }
+.s_row_alt { background-color:#DEDEDE; }
+.s_titlerow { background-color:#002b54; padding:6px; color:#fff }
+div.s_row { padding:6px; }
+div.s_row_alt { background-color:#DEDEDE; }
+div.s_dtl { margin-left:20px; }
+div.s_opt { padding:3px; }
+div.s_act { float:right; padding:0 0 5px 5px; }
+a.ctv { text-decoration:none; }
+div.s_pgbtm { padding:6px 3px 0px 3px;text-align:right; }
+div.s_pgtop { padding:3px 3px 6px 3px; }
+div.s_rhrd { background-color:#DEDEDE;padding:3px;margin-bottom:3px; }
+div.appIcons a img{position:relative;margin-right:10px;}
+.r { text-align:right; }
+
+
+ul.tsAppNavButtonGroup {
+	display:block;
+	list-style:none;
+	overflow:hidden;
+	-webkit-padding-start: 0px;
+	-moz-padding-start: 0px;
+	-webkit-padding-start: 0px;
+	-khtml-padding-start: 0px;
+	-o-padding-start: 0px;
+	padding-start: 0px;
+	padding:0px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	border-bottom: 1px solid #B7BABC;
+}
+li.tsAppNavButton{
+   display:block;
+   float:left;
+}
+li.tsAppNavButton a{
+	display:block;
+	text-decoration:none;
+	color:#0B333C;
+	font: bold 11px tahoma,arial,helvetica;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border:1px solid #d5d5d5;
+	border-bottom-color:#ddd;
+	background:#ddd;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(.25, #eee),color-stop(1, #ddd));
+	background: -webkit-linear-gradient(top,#eee 25%,#ddd 100%);
+	background: -moz-linear-gradient(top,#eee 25%,#ddd 100%);
+	background: -o-linear-gradient(top,#eee 25%,#ddd 100%);
+	background: linear-gradient(top,#eee 25%,#ddd 100%);
+	-webkit-box-shadow:inset 0 1px 2px rgba(255,255,255,0.1);
+	-moz-box-shadow:inset 0 1px 2px rgba(255,255,255,0.1);
+	box-shadow:inset 0 1px 2px rgba(255,255,255,0.1);
+	padding:4px 12px 6px 16px;
+	border-right:0;
+}
+li.tsAppNavButton:last-child a {
+	border-right:1px solid #d5d5d5;
+}
+li.tsAppNavButton a.tsAppNavButtonSelected, li.tsAppNavButton a.tsAppNavButtonSelected:hover {
+	color:#0B333C;
+	background:#fff;
+}
+
+li.tsAppNavButton a.tsAppNavButtonDisabled, li.tsAppNavButton a.tsAppNavButtonDisabled:hover {
+	color:#aaa;
+	background:#eee;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(.25, #ddd),color-stop(1, #eee));
+	background: -webkit-linear-gradient(top,#ddd 25%,#eee 100%);
+	background: -moz-linear-gradient(top,#ddd 25%,#eee 100%);
+	background: -o-linear-gradient(top,#ddd 25%,#eee 100%);
+	background: linear-gradient(top,#ddd 25%,#eee 100%);
+}
+
+
+li.tsAppNavButton a:hover{
+	background:#eee;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(.25, #fff),color-stop(1, #eee));
+	background: -webkit-linear-gradient(top,#fff 25%,#eee 100%);
+	background: -moz-linear-gradient(top,#fff 25%,#eee 100%);
+	background: -o-linear-gradient(top,#fff 25%,#eee 100%);
+	background: linear-gradient(top,#fff 25%,#eee 100%);
+}
+li a:active{
+	text-shadow:0 -1px #fff;
+	background:#ccc;
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(.25, #eee),color-stop(1, #fff));
+	background: -webkit-linear-gradient(top,#eee 25%,#fff 100%);
+	background: -moz-linear-gradient(top,#eee 25%,#fff 100%);
+	background: -o-linear-gradient(top,#eee 25%,#fff 100%);
+	background: linear-gradient(top,#eee 25%,#fff 100%);
+	-webkit-box-shadow:inset 0 1px 2px rgba(0,0,0,0.1);
+	-moz-box-shadow:inset 0 1px 2px rgba(0,0,0,0.1);
+	box-shadow:inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+ div.tsAppViewStackItem {
+ 	padding:9px;
+ 	border: 1px solid #B7BABC;
+ 	border-top: 0px none;
+ }
+
+  div.tsAppViewStackTopBorder {
+ 	border-top: 1px solid #B7BABC;
+ }
+
+select, input { width:auto;}
+
+#tssearchbararea ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	/*border-bottom: 2px solid #e7e7e7;*/
+	background-color: #e7e7e7;
+}
+
+#tssearchbararea li {
+	float: left;
+}
+
+#tssearchbararea li a {
+	display: block;
+	/*color: white;*/
+	text-align: center;
+	padding: 7px 9px;
+	text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#tssearchbararea li a:hover {
+	background-color: #ababab;
+}
+
+#tssearchbararea .active {
+	background-color: #4CAF50;
+}
+
+/* Add a gray right border to all list items, except the last item (last-child) */
+#tssearchbararea li {
+	border-right: 2px solid #fff;
+}
+
+#tssearchbararea li:last-child {
+	border-right: none;
+}
+
+.tsAppFullscreen {
+    z-index: 9000; 
+    width: 100%; 
+    height: 100%; 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+}
+
+/* blog/article app styles */
+ul.sectnav {display: flex; flex-flow: row wrap; width:100%; margin:0 0 2em 0; margin-left:0px!important; padding:0; background:#c7dad9; font:bold 13px/20px Arial,Helvetica,sans-serif; white-space:nowrap; -moz-border-radius:3px; -khtml-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; list-style:none;}
+ul.sectnav li { display:block; margin:0; padding:0;}
+ul.sectnav li a { display:block; margin:0 -2px; position:relative; padding:5px 10px; color:#000; -moz-border-radius:3px; -khtml-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+ul.sectnav li a:hover, ul.sectnav li.on a {background:#6ca7a6; color:#fff; text-decoration:none; -moz-box-shadow:inset -1px -1px 2px rgba(0,0,0,0.4), inset 1px 1px 2px rgba(255,255,255,0.7); -webkit-box-shadow:inset -1px -1px 2px rgba(0,0,0,0.4), inset 1px 1px 2px rgba(255,255,255,0.7); box-shadow:inset -1px -1px 2px rgba(0,0,0,0.4), inset 1px 1px 2px rgba(255,255,255,0.7);}
+ul.sectnav li a:hover {z-index:10;}
+ul.sectnav li.sep {display:block; width:0; height:15px; border-left:2px solid #89a29a; margin:8px 0px; line-height:15px;}
+.articleRSS  { padding-left:30px!important; background:#E5841D url(/indylawyerfinder-demo/assets/common/images/ico-rss-nobg.png) no-repeat 7px 6px; color:#fff!important; }
+a.articleRSS:hover { background:#E5841D url(/indylawyerfinder-demo/assets/common/images/ico-rss-nobg.png) no-repeat 7px 6px!important; color:#fff!important; }
+
+
+.mcMergeTemplate{display:none;}
+/* allow divs to show up in editor */
+.cke_editable .mcMergeTemplate {display:block;}
+
+/* member directory styles */
+/* fix classification images in responsive views in IE11 */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	.container-fluid .pull-left .directory-groupImage {
+		width:100%;
+		max-width:100%;
+	}
+}
